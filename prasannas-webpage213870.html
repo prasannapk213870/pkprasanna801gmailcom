@@ -9,15 +9,51 @@
             background-color: black;
             color: white; /* Optional: to make text readable on black background */
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
         }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #555;
+        }
     </style>
 </head>
 <body>
     <h1>Welcome to prasanna's webpage213870</h1>
+    <button id="teamsButton">Open Teams</button>
+
+    <script>
+        document.getElementById("teamsButton").addEventListener("click", function() {
+            openTeams();
+        });
+
+        function openTeams() {
+            // Use a custom URI scheme to open Teams
+            // This URI may vary depending on the platform and the installed application
+            // For Windows:
+            var teamsURI = "msteams://";
+            // For Mac:
+            // var teamsURI = "msteams://";
+            // For iOS:
+            // var teamsURI = "msteams://";
+            // For Android:
+            // var teamsURI = "msteams://";
+
+            window.location.href = teamsURI;
+        }
+    </script>
 </body>
 </html>
