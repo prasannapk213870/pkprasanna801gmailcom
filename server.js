@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { v4: uuidv4 } = require('uuid'); // Import the uuid library
 
 const app = express();
 const port = 3000;
@@ -17,7 +16,7 @@ app.post('/submit-form', (req, res) => {
     console.log('Client data received:', clientData);
     
     // Generate a unique submission number
-    const submissionNumber = uuidv4();
+    const submissionNumber = Date.now(); // Simple unique identifier for demonstration
 
     // Log the submission number
     console.log('Submission Number:', submissionNumber);
