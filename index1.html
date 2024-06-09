@@ -11,10 +11,22 @@
 
     <script>
         function runLedScript() {
-            fetch('/run_led_script')
-                .then(response => response.text())
-                .then(data => alert(data))
-                .catch(error => console.error('Error:', error));
+            // Define the command to be executed
+            const command = 'python3 Led.py'; // Modify this command as needed
+
+            // Make a POST request to the Flask server
+            fetch('/run_command', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'command': command
+                })
+            })
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => console.error('Error:', error));
         }
     </script>
 </body>
