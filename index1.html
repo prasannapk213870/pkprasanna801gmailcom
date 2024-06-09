@@ -11,22 +11,27 @@
 
     <script>
         function runLedScript() {
-            // Define the command to be executed
-            const command = 'python3 Led.py'; // Modify this command as needed
+            // Define the URL of your local server
+            const serverUrl = 'http://192.168.34.76:5000/run_led_script';
 
-            // Make a POST request to the Flask server
-            fetch('/run_command', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: new URLSearchParams({
-                    'command': command
-                })
+            // Make a POST request to the local server
+            fetch(serverUrl, {
+                method: 'POST'
             })
-            .then(response => response.text())
-            .then(data => alert(data))
-            .catch(error => console.error('Error:', error));
+            .then(response => {
+                if (response.ok) {
+                    // Request was successful
+                    alert('Command executed successfully.');
+                } else {
+                    // Request failed
+                    alert('Failed to execute command.');
+                }
+            })
+            .catch(error => {
+                // Error occurred during the request
+                console.error('Error:', error);
+                alert('An error occurred while executing the command.');
+            });
         }
     </script>
 </body>
