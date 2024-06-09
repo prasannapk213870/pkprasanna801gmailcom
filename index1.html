@@ -3,36 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LED Control</title>
+    <title>Play Bulb</title>
+    <style>
+        /* Random design */
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <h1>Control the LED</h1>
-    <button onclick="runLedScript()">Run Led.py</button>
+    <h2>Click the button to play the bulb</h2>
+    <button id="playButton">Play Bulb</button>
 
     <script>
-        function runLedScript() {
-            // Define the URL of your local server
-            const serverUrl = 'http://127.0.0.1:5000/run_led_script';
-
-            // Make a POST request to the local server
-            fetch(serverUrl, {
-                method: 'POST'
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Request was successful
-                    alert('Command executed successfully.');
-                } else {
-                    // Request failed
-                    alert('Failed to execute command.');
-                }
-            })
-            .catch(error => {
-                // Error occurred during the request
-                console.error('Error:', error);
-                alert('An error occurred while executing the command.');
-            });
+        // Function to send request to the server when button is clicked
+        function playBulb() {
+            fetch('/play_bulb', { method: 'POST' })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data); // Log response from server
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
         }
+
+        // Attach click event listener to the button
+        document.getElementById('playButton').addEventListener('click', playBulb);
     </script>
 </body>
 </html>
